@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Green and White Minimalist Book Store Logo.png">
-    <title>InkPiston </title>
+    <title>InkPiston - Productivity eBooks</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary: #FF5722;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f5;
+            --gray: #333;
+            --light-gray: #aaa;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #121212;
-            color: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
         }
         
         .header {
@@ -20,93 +40,220 @@
             align-items: center;
             padding: 2rem;
             text-align: center;
-            background-color: #000000;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--gray) 100%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite linear;
+            z-index: 0;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .logo-container {
             display: flex;
             justify-content: center;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease both;
         }
         
         .logo {
             width: 120px;
             height: auto;
-            transition: transform 0.3s ease;
-            filter: invert(100%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: invert(100%) drop-shadow(0 0 5px rgba(76, 175, 80, 0.5));
         }
         
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(-5deg);
+            filter: invert(100%) drop-shadow(0 0 10px rgba(76, 175, 80, 0.8));
         }
         
         .title {
             font-size: 1.8rem;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--light);
             margin: 0;
             padding: 0 1rem;
             line-height: 1.3;
             max-width: 800px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 15px auto 0;
+            border-radius: 2px;
+            animation: scaleIn 0.8s ease 0.6s both;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
         }
         
         .library-box {
-            background: #1e1e1e;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             max-width: 95%;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
             overflow: hidden;
-            padding: 20px;
-            border: 1px solid #333;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 1s ease 0.4s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .library-header {
-            color: #ffffff;
+            color: var(--light);
             padding: 0 0 20px 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
             text-align: center;
-            border-bottom: 1px solid #333;
-            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .library-header::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
         
         .books-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-            padding: 10px 0;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
         }
         
         .book-card {
-            background: #000000;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .book-card:nth-child(1) { animation: cardFadeIn 0.6s ease 0.6s forwards; }
+        .book-card:nth-child(2) { animation: cardFadeIn 0.6s ease 0.8s forwards; }
+        .book-card:nth-child(3) { animation: cardFadeIn 0.6s ease 1.0s forwards; }
+        .book-card:nth-child(4) { animation: cardFadeIn 0.6s ease 1.2s forwards; }
+        .book-card:nth-child(5) { animation: cardFadeIn 0.6s ease 1.4s forwards; }
+        
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .book-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
-            border-color: #555;
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(76, 175, 80, 0.3);
         }
         
         .book-cover-container {
             width: 100%;
-            height: 160px;
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             overflow: hidden;
-            border-radius: 6px;
-            background: #333;
+            border-radius: 8px;
+            background: rgba(51, 51, 51, 0.5);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .book-card:hover .book-cover-container {
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .book-cover {
@@ -114,47 +261,98 @@
             height: 100%;
             object-fit: contain;
             object-position: center;
+            transition: all 0.5s ease;
+        }
+        
+        .book-card:hover .book-cover {
+            transform: scale(1.05);
         }
         
         .book-title {
             font-weight: 600;
-            margin: 0 0 5px 0;
-            color: #ffffff;
-            font-size: 1rem;
+            margin: 0 0 8px 0;
+            color: var(--light);
+            font-size: 1.05rem;
             flex-grow: 1;
+            transition: color 0.3s ease;
+        }
+        
+        .book-card:hover .book-title {
+            color: var(--primary);
         }
         
         .book-author {
-            color: #aaa;
+            color: var(--light-gray);
             font-size: 0.85rem;
-            margin: 0 0 12px 0;
+            margin: 0 0 15px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .book-card:hover .book-author {
+            color: var(--light);
         }
         
         .download-btn {
-            background: #ffffff;
-            color: #000000;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--light);
             border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
+            padding: 10px 15px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
             text-decoration: none;
             display: block;
             font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .download-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
         }
         
         .download-btn:hover {
-            background: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
         }
         
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Floating animation for the header */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .logo-container {
+            animation: fadeInDown 1s ease both, floating 3s ease-in-out infinite 1s;
+        }
+        
+        /* Responsive adjustments */
         @media (min-width: 768px) {
             .header {
                 flex-direction: row;
                 justify-content: center;
-                gap: 2rem;
+                gap: 3rem;
                 text-align: left;
+                padding: 3rem 2rem;
             }
             
             .logo-container {
@@ -162,11 +360,31 @@
             }
             
             .title {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
+                text-align: left;
             }
             
             .library-box {
                 max-width: 90%;
+                padding: 40px;
+            }
+            
+            .books-container {
+                gap: 35px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.5rem;
+            }
+            
+            .library-header {
+                font-size: 1.6rem;
+            }
+            
+            .books-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -197,8 +415,7 @@
                 <div class="book-cover-container">
                     <img src="./E book front photos/the laws of human nature.jpg" alt="Deep Work" class="book-cover">
                 </div>
-                <h3 class="book-title">The Laws of Human Nature
-                </h3>
+                <h3 class="book-title">The Laws of Human Nature</h3>
                 <p class="book-author">Robert Greene</p>
                 <a href="./e-books/The Laws of Human Nature.pdf" class="download-btn">Download</a>
             </div>
@@ -208,8 +425,7 @@
                 <div class="book-cover-container">
                     <img src="./E book front photos/The Subtle Art of Not Giving a Fck A Counterintuitive Approach to Living a Good Life.jpg" alt="4-Hour Workweek" class="book-cover">
                 </div>
-                <h3 class="book-title">The Subtle Art of Not Giving a F*ck
-                </h3>
+                <h3 class="book-title">The Subtle Art of Not Giving a F*ck</h3>
                 <p class="book-author">Mark Manson</p>
                 <a href="./e-books/The Subtle Art of Not Giving a Fck A Counterintuitive Approach to Living a Good Life by Mark Manson (z-lib.org).pdf" class="download-btn">Download</a>
             </div>
@@ -223,9 +439,22 @@
                 <p class="book-author">Robert Greene</p>
                 <a href="./e-books/the-art-of-seduction-robert-greene.pdf" class="download-btn">Download</a>
             </div>
-            
-            
-            <!-- Book 5 -->
+
+
+             <!-- Book 5 -->
+             <div class="book-card">
+                <div class="book-cover-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm2Y_RCYJgs9yN_ty-XPq0Tc2xVemQhjHC2A&s" alt="Power of Habit" class="book-cover">
+                </div>
+                <h3 class="book-title">Rich Dad Poor Dad
+                </h3>
+                <p class="book-author">Robert Kiyosaki and Sharon Lechter
+                </p>
+                <a href="./e-books/Rich-Dad-Poor-Dad-eBook.pdf" class="download-btn">Download</a>
+            </div>
+
+
+            <!-- Book 6 -->
             <div class="book-card">
                 <div class="book-cover-container">
                     <img src="./E book front photos/Thinking, Fast and Slow by Daniel Kahneman (z-lib.org).jpg" alt="Essentialism" class="book-cover">
@@ -233,19 +462,20 @@
                 <h3 class="book-title">Thinking, Fast and Slow</h3>
                 <p class="book-author">Daniel Kahneman</p>
                 <a href="./e-books/Thinking, Fast and Slow by Daniel Kahneman (z-lib.org).pdf" class="download-btn">Download</a>
-
-                <!-- Book 6
-            <div class="book-card">
-                <div class="book-cover-container">
-                    <img src="https://via.placeholder.com/200x260/333333/ffffff?text=Power+of+Habit" alt="Power of Habit" class="book-cover">
-                </div>
-                <h3 class="book-title">Power of Habit</h3>
-                <p class="book-author">Charles Duhigg</p>
-                <a href="#" class="download-btn">Download</a>
-            </div> -->
-            
             </div>
         </div>
     </div>
+
+    <script>
+        // Small script to add random stagger delay to book cards for more organic animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.book-card');
+            cards.forEach((card, index) => {
+                // Override the CSS animation delay with a slightly randomized one
+                const delay = 0.6 + (index * 0.2) + (Math.random() * 0.2);
+                card.style.animationDelay = `${delay}s`;
+            });
+        });
+    </script>
 </body>
 </html>
