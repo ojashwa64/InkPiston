@@ -34,6 +34,7 @@
             color: var(--light);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .header {
@@ -208,13 +209,12 @@
             overflow: hidden;
             transform: translateY(20px);
             opacity: 0;
+            will-change: transform, opacity;
         }
         
-        .book-card:nth-child(1) { animation: cardFadeIn 0.6s ease 0.6s forwards; }
-        .book-card:nth-child(2) { animation: cardFadeIn 0.6s ease 0.8s forwards; }
-        .book-card:nth-child(3) { animation: cardFadeIn 0.6s ease 1.0s forwards; }
-        .book-card:nth-child(4) { animation: cardFadeIn 0.6s ease 1.2s forwards; }
-        .book-card:nth-child(5) { animation: cardFadeIn 0.6s ease 1.4s forwards; }
+        .book-card.animate {
+            animation: cardFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
         
         @keyframes cardFadeIn {
             to {
@@ -234,7 +234,7 @@
         }
         
         .book-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
             border-color: rgba(58, 134, 255, 0.3);
         }
@@ -251,6 +251,7 @@
             background: rgba(51, 51, 51, 0.5);
             position: relative;
             transition: all 0.3s ease;
+            transform-style: preserve-3d;
         }
         
         .book-card:hover .book-cover-container {
@@ -347,6 +348,20 @@
             animation: fadeInDown 1s ease both, floating 3s ease-in-out infinite 1s;
         }
         
+        /* Apple-like scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         /* Responsive adjustments */
         @media (min-width: 768px) {
             .header {
@@ -421,17 +436,17 @@
         <h2 class="library-header">Books Library</h2>
         <div class="books-container">
             <!-- Book 1 -->
-            <div class="book-card">
+            <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="./E book front photos/48 laws of power.jpg" alt="48 Laws of Power" class="book-cover">
                 </div>
                 <h3 class="book-title">48 Laws of Power</h3>
                 <p class="book-author">Robert Greene</p>
-                <a href="#" class="download-btn">Download</a>
+                <a href="./e-books/48 Laws of Power by Robert Greene (z-lib.org).pdf" class="download-btn">Download</a>
             </div>
             
             <!-- Book 2 -->
-            <div class="book-card">
+            <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="./E book front photos/the laws of human nature.jpg" alt="Deep Work" class="book-cover">
                 </div>
@@ -441,7 +456,7 @@
             </div>
             
             <!-- Book 3 -->
-            <div class="book-card">
+            <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="./E book front photos/The Subtle Art of Not Giving a Fck A Counterintuitive Approach to Living a Good Life.jpg" alt="4-Hour Workweek" class="book-cover">
                 </div>
@@ -451,7 +466,7 @@
             </div>
             
             <!-- Book 4 -->
-            <div class="book-card">
+            <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="./E book front photos/the-art-of-seduction-robert-greene.webp" alt="Getting Things Done" class="book-cover">
                 </div>
@@ -460,22 +475,18 @@
                 <a href="./e-books/the-art-of-seduction-robert-greene.pdf" class="download-btn">Download</a>
             </div>
              
-
              <!-- Book 5 -->
-             <div class="book-card">
+             <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm2Y_RCYJgs9yN_ty-XPq0Tc2xVemQhjHC2A&s" alt="Power of Habit" class="book-cover">
                 </div>
-                <h3 class="book-title">Rich Dad Poor Dad
-                </h3>
-                <p class="book-author">Robert Kiyosaki and Sharon Lechter
-                </p>
+                <h3 class="book-title">Rich Dad Poor Dad</h3>
+                <p class="book-author">Robert Kiyosaki and Sharon Lechter</p>
                 <a href="./e-books/Rich-Dad-Poor-Dad-eBook.pdf" class="download-btn">Download</a>
             </div>
 
-
             <!-- Book 6 -->
-            <div class="book-card">
+            <div class="book-card scroll-animate">
                 <div class="book-cover-container">
                     <img src="./E book front photos/Thinking, Fast and Slow by Daniel Kahneman (z-lib.org).jpg" alt="Essentialism" class="book-cover">
                 </div>
@@ -483,17 +494,72 @@
                 <p class="book-author">Daniel Kahneman</p>
                 <a href="./e-books/Thinking, Fast and Slow by Daniel Kahneman (z-lib.org).pdf" class="download-btn">Download</a>
             </div>
+            
+            <!-- Book 7 -->
+            <div class="book-card scroll-animate">
+                <div class="book-cover-container">
+                    <img src="https://m.media-amazon.com/images/I/71sxTeZIi6L._AC_UF1000,1000_QL80_.jpg" alt="The Lean Startup" class="book-cover">
+                </div>
+                <h3 class="book-title">The Lean Startup</h3>
+                <p class="book-author">Eric Ries</p>
+                <a href="./e-books/The Lean Startup - Erick Ries.pdf" class="download-btn">Download</a>
+            </div>
+            
+            <!-- Book 8 -->
+            <div class="book-card scroll-animate">
+                <div class="book-cover-container">
+                    <img src="https://m.media-amazon.com/images/I/61wwAomEffL.jpg" alt="Influence" class="book-cover">
+                </div>
+                <h3 class="book-title">Influence: The Psychology of Persuasion</h3>
+                <p class="book-author">Robert Cialdini</p>
+                <a href="./e-books/The Psychology of Persuasion.pdf" class="download-btn">Download</a>
+            </div>
+            
+            <!-- Book 9 -->
+            <div class="book-card scroll-animate">
+                <div class="book-cover-container">
+                    <img src="https://m.media-amazon.com/images/I/61-xsrzjQsL._AC_UF1000,1000_QL80_.jpg" alt="Emotional Intelligence" class="book-cover">
+                </div>
+                <h3 class="book-title">Emotional Intelligence 2.0</h3>
+                <p class="book-author">Greaves Jean and Travis Bradberry</p>
+                <a href="./e-books/Emotional Intelligence 2.0.pdf" class="download-btn">Download</a>
+            </div>
+            
+            <!-- Book 10 -->
+            <div class="book-card scroll-animate">
+                <div class="book-cover-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0kUJb_zwNfgz2QyFV8ij8AUUkT7zfCWGoWA&s" alt="Atomic Habits" class="book-cover">
+                </div>
+                <h3 class="book-title">Atomic Habits</h3>
+                <p class="book-author">James Clear</p>
+                <a href="./e-books/Atomic Habits by James Clear.pdf" class="download-btn">Download</a>
+            </div>
         </div>
     </div>
 
     <script>
+        // Intersection Observer for Apple-like scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all elements with scroll-animate class
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
         // Small script to add random stagger delay to book cards for more organic animation
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.book-card');
             cards.forEach((card, index) => {
-                // Override the CSS animation delay with a slightly randomized one
-                const delay = 0.6 + (index * 0.2) + (Math.random() * 0.2);
-                card.style.animationDelay = `${delay}s`;
+                const delay = 0.2 + (index * 0.05);
+                card.style.transitionDelay = `${delay}s`;
             });
         });
     </script>
